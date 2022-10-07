@@ -118,12 +118,7 @@
       (else (cond
         ((eq? (car lat) a) (multirember a (cdr lat)))
         (else
-          (cons (car lat) (multirember a (cdr lat)))
-        )
-      ))
-    )
-  )
-)
+          (cons (car lat) (multirember a (cdr lat)))))))))
 
 ; multiinsertR
 ;   inserts an S-expression to the right of
@@ -140,12 +135,7 @@
       (else (cond
         ((eq? (car lat) old) (cons old (cons new (multiinsertR new old (cdr lat)))))
         (else
-          (cons (car lat) (multiinsertR new old (cdr lat)))
-        )
-      ))
-    )
-  )
-)
+          (cons (car lat) (multiinsertR new old (cdr lat)))))))))
 
 ; multiinsertL
 ;   inserts an S-expression to the left of
@@ -162,12 +152,25 @@
       (else (cond
         ((eq? (car lat) old) (cons new (cons old (multiinsertL new old (cdr lat)))))
         (else
-          (cons (car lat) (multiinsertL new old (cdr lat)))
-        )
-      ))
-    )
-  )
-)
+          (cons (car lat) (multiinsertL new old (cdr lat)))))))))
+
+; multisubst
+;   replaces all occurrences of some S-expression
+;   by some other S-expression
+;   in a list of S-expressions
+;
+; example
+;   (multisubst 'taco 'fish '(chips and fish or fish and fried))
+; produces
+;   (chips and taco or taco and fried)
+(define multisubst
+  (lambda (new old lat)
+    (cond
+      ((null? lat) '())
+      (else (cond
+              ((eq? (car lat) old) (cons new (multisubst new old (cdr lat))))
+              (else
+                (cons (car lat) (multisubst new old (cdr lat)))))))))
 
 ;;;;;;;;;;;;;;;;;;;;
 ;
