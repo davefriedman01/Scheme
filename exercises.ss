@@ -1,7 +1,8 @@
 ; This file contains an implementation in Chez Scheme of the programs presented in the following work.
+;   Abelson, Harold & Gerald Jay Sussman. (1996). Structure and Interpretation of Computer Programs. 2nd Ed. MIT Press.
 ;   Friedman, Daniel P. & Matthias Felleisen. (1996). The Little Schemer. 4th Ed. MIT Press.
 ;
-; Load this file into Chez Scheme via
+; Load this file into Chez Scheme REPL via
 ;   (load "exercises.ss") 
 
 (car '(a b c))
@@ -336,3 +337,39 @@
 ;
 ;;;;;;;;;;;;;;;;;;;;
 
+
+
+;;;;;;;;;;;;;;;;;;;;
+;
+; SICP
+;
+;;;;;;;;;;;;;;;;;;;;
+;
+; DATA
+;   stuff to be manipulated
+; PROCEDURE
+;   a description of a process
+;   that which gives the rules for manipulating data
+;   procedures themselves can be represented and manipulated as data
+;
+; EXPRESSION
+;
+; COMBINATION
+;   an expression formed by delimiting a list of expressions within parentheses
+;   in order to denote procedure application
+;   the leftmost element in the list is called the operator
+;   and the rest of the elements are called operands
+
+(+ 137 349)
+(- 1000 334)
+(* 5 99)
+(/ 10 5)
+(* 2.7 10)
+(+ 21 35 12 7)
+(* 25 4 12)
+(+ (* 3 5) (- 10 6))
+(+ (* 3
+      (+ (* 2 4)
+         (+ 3 5)))
+   (+ (- 10 7)
+      6))
