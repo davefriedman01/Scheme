@@ -104,6 +104,13 @@
               (else
                 (cons (car lat) (subst2 new o1 o2 (cdr lat)))))))))
 
+; multirember
+;   removes all occurrences of an S-expression from a list of S-expressions
+;
+; example
+;   (multirember 'cup '(coffee cup tea cup and hick cup))
+; produces
+;   (coffee tea and hick)
 (define multirember
   (lambda (a lat)
     (cond
@@ -112,6 +119,28 @@
         ((eq? (car lat) a) (multirember a (cdr lat)))
         (else
           (cons (car lat) (multirember a (cdr lat)))
+        )
+      ))
+    )
+  )
+)
+
+; multiinsertR
+;   inserts an S-expression to the right of
+;   all occurrences of some S-expression in a list of S-expressions
+;
+; example
+;   (multiinsertR 'fried 'fish '(chips and fish or fish and fried))
+; produces
+;   (chips and fish fried or fish fried and fried)
+(define multiinsertR
+  (lambda (new old lat)
+    (cond
+      ((null? lat) '())
+      (else (cond
+        ((eq? (car lat) old) (cons (car lat) (cons new (multiinsertR new old (cdr lat)))))
+        (else
+          (cons (car lat) (multiinsertR new old (cdr lat)))
         )
       ))
     )
