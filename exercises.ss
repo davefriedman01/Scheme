@@ -138,9 +138,31 @@
     (cond
       ((null? lat) '())
       (else (cond
-        ((eq? (car lat) old) (cons (car lat) (cons new (multiinsertR new old (cdr lat)))))
+        ((eq? (car lat) old) (cons old (cons new (multiinsertR new old (cdr lat)))))
         (else
           (cons (car lat) (multiinsertR new old (cdr lat)))
+        )
+      ))
+    )
+  )
+)
+
+; multiinsertL
+;   inserts an S-expression to the left of
+;   all occurrences of some S-expression in a list of S-expressions
+;
+; example
+;   (multiinsertL 'fried 'fish '(chips and fish or fish and fried))
+; produces
+;   (chips and fried fish or fried fish and fried)
+(define multiinsertL
+  (lambda (new old lat)
+    (cond
+      ((null? lat) '())
+      (else (cond
+        ((eq? (car lat) old) (cons new (cons old (multiinsertL new old (cdr lat)))))
+        (else
+          (cons (car lat) (multiinsertL new old (cdr lat)))
         )
       ))
     )
