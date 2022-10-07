@@ -29,7 +29,13 @@
 ;   a string of characters or a number
 ; LIST l
 ;   either the empty list '()
-;   or a non-empty list of S-expressions
+;   or
+;     an S-expression (car l)
+;     and a list l (cdr l)
+;
+; S-EXPRESSION
+;   an atom or a list
+;
 ; LIST OF ATOMS lat
 ;   either the empty list '()
 ;   or
@@ -40,19 +46,35 @@
 ;   or
 ;     a number (car tup)
 ;     and a tup (cdr tup)
-; S-EXPRESSION
-;   an atom or a list
+; NUMBER n
+;   either the empty number 0
+;   or
+;     unity 1
+;     and a number (sub1 n)
 
-; building numbers
-;   constructor:              add1
-;   terminal condition:       (null? tup)
-;   terminal condition value: 0
-;                             ((null? tup) 0)
 ; building lists
 ;   constructor:              cons
 ;   terminal condition:       (null? l)
 ;   terminal condition value: '()
 ;                             ((null? l) '())
+;   natural recursion:        (cdr lat)
+;     the rest of a non-empty list is a list
+;   questions to ask of a list: 2
+; building tuples
+;   constructor:              o+
+;   terminal condition:       (null? tup)
+;   terminal condition value: 0
+;                             ((null? tup) 0)
+;   natural recursion:        (cdr tup)
+;     the rest of a non-empty tup is a tup
+;   questions to ask of a tup: 2
+; building numbers
+;   constructor:              add1
+;   terminal condition:       (zero? n)
+;   terminal condition value: 0
+;                             ((zero? n) 0)
+;   natural recursion:        (sub1 n)
+;   questions to ask of a number: 2
 
 
 
