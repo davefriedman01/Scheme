@@ -1,2 +1,4 @@
 # ExercisesScheme
-Exercises in the Scheme programming language.
+```scheme
+'(Exercises in the Scheme programming language)
+```
