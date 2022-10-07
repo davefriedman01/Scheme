@@ -59,7 +59,10 @@
 ;                             ((null? l) '())
 ;   natural recursion:        (cdr lat)
 ;     the rest of a non-empty list is a list
-;   questions to ask of a list: 2
+;   questions to ask of a list
+;     1. (null? lat)
+;     2. else
+;
 ; building tuples
 ;   constructor:              o+
 ;   terminal condition:       (null? tup)
@@ -67,18 +70,19 @@
 ;                             ((null? tup) 0)
 ;   natural recursion:        (cdr tup)
 ;     the rest of a non-empty tup is a tup
-;   questions to ask of a tup: 2
+;   questions to ask of a tup
+;     1. (null? tup)
+;     2. else
+;
 ; building numbers
 ;   constructor:              add1
 ;   terminal condition:       (zero? n)
 ;   terminal condition value: 0
 ;                             ((zero? n) 0)
 ;   natural recursion:        (sub1 n)
-;   questions to ask of a number: 2
-
-
-
-;;;;;;;;;;;;;;;;;;;;
+;   questions to ask of a number
+;     (zero? n)
+;     else
 
 (define atom?
   (lambda (x)
@@ -280,7 +284,31 @@
       (else
         (sub1 (o- n (sub1 m)))))))
 
+; addtup
+;   builds a number
+;   by totaling all the numbers in a tup
+;
+;   terminal condition
+;     ((null? tup) 0)
+;   natural recursion
+;     (addtup (cdr tup))
+;
+; example
+;   (addtup '(1 2 3 4))
+; produces
+;   10
+(define addtup
+  (lambda (tup)
+    (cond
+      ((null? tup) 0)
+      (else
+        (o+ (car tup) (addtup (cdr tup)))))))
 
+(define x
+  (lambda (n m)
+    (cond
+      ((zero? m) 0)
+      (else (o+ n (x n (sub1 m)))))))
 
 ;;;;;;;;;;;;;;;;;;;;
 ;
