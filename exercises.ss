@@ -25,15 +25,38 @@
 ;
 ;;;;;;;;;;;;;;;;;;;;
 
-; ATOM
-;   a string of characters
-;   a number
+; ATOM a
+;   a string of characters or a number
+; LIST l
+;   either the empty list '()
+;   or a non-empty list of S-expressions
+; LIST OF ATOMS lat
+;   either the empty list '()
+;   or
+;     an atom (car lat)
+;     and a lat (cdr lat)
+; TUPLE tup
+;   either the empty tup '()
+;   or
+;     a number (car tup)
+;     and a tup (cdr tup)
+; S-EXPRESSION
+;   an atom or a list
 
-; zero? asks if a number is empty
-; null? asks if a list   is empty
+; building numbers
+;   constructor:              add1
+;   terminal condition:       (null? tup)
+;   terminal condition value: 0
+;                             ((null? tup) 0)
+; building lists
+;   constructor:              cons
+;   terminal condition:       (null? l)
+;   terminal condition value: '()
+;                             ((null? l) '())
 
-; add1 builds numbers
-; cons builds lists
+
+
+;;;;;;;;;;;;;;;;;;;;
 
 (define atom?
   (lambda (x)
