@@ -24,7 +24,7 @@
 ; LITTLE SCHEMER
 ;
 ;;;;;;;;;;;;;;;;;;;;
-
+;
 ; ATOM a
 ;   a string of characters or a number
 ; LIST l
@@ -51,7 +51,7 @@
 ;   or
 ;     unity 1
 ;     and a number (sub1 n)
-
+;
 ; building lists
 ;   constructor:              cons
 ;   terminal condition:       (null? l)
@@ -83,6 +83,16 @@
 ;   questions to ask of a number
 ;     (zero? n)
 ;     else
+;
+; C1
+;   Recursion on a list of atoms lat: (null? lat) and else
+;   Recursion on a number n:          (zero? n)   and else
+; C4
+;   Change at least one argument in recursion.
+;   Change it closer to termination.
+;   Test the changing argument in the termination condition.
+;   Test null? with cdr
+;   Test zero? with sub1
 
 (define atom?
   (lambda (x)
