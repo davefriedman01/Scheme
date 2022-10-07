@@ -1,28 +1,14 @@
 ; This file contains an implementation in Chez Scheme of the programs presented in the following work.
-;   Abelson, Harold & Gerald Jay Sussman. (1996). Structure and Interpretation of Computer Programs. 2nd Ed. MIT Press.
-;   Friedman, Daniel P. & Matthias Felleisen. (1996). The Little Schemer. 4th Ed. MIT Press.
+;   [SICP] Abelson, Harold & Gerald Jay Sussman. (1996). Structure and Interpretation of Computer Programs. 2nd Ed. MIT Press.
+;   [SPL4] Dybvig, R. Kent. The Scheme Programming Language. 4th Ed. https://www.scheme.com/tspl4/.
+;   [TLS4] Friedman, Daniel P. & Matthias Felleisen. (1996). The Little Schemer. 4th Ed. MIT Press.
 ;
 ; Load this file into Chez Scheme REPL via
 ;   (load "exercises.ss") 
 
-(car '(a b c))
-(cdr '(a b c))
-(cons 'a '(b c))
-(null? '())
-(eq? '1 '1)
-(or (atom? 'a) (atom? '(a)))
-
-(define square
-  (lambda (n)
-    (* n n)))
-
-(define reciprocal
-  (lambda (n)
-    (if (= n 0) "oops!" (/ 1 n))))
-
 ;;;;;;;;;;;;;;;;;;;;
 ;
-; LITTLE SCHEMER
+; TLS4
 ;
 ;;;;;;;;;;;;;;;;;;;;
 ;
@@ -373,3 +359,17 @@
          (+ 3 5)))
    (+ (- 10 7)
       6))
+
+;;;;;;;;;;;;;;;;;;;;
+;
+; SPL4
+;
+;;;;;;;;;;;;;;;;;;;;
+
+(define square
+  (lambda (n)
+    (* n n)))
+
+(define reciprocal
+  (lambda (n)
+    (if (= n 0) "oops!" (/ 1 n))))
