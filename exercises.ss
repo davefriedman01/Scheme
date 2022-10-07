@@ -252,7 +252,7 @@
 ;   adds unity to n as many times as
 ;   unity may be substracted from m
 ;   until m reachs null
-;   (m cannot be negative)
+;   (rule: m cannot be negative)
 ;
 ; example
 ;   (o+ 46 12)
@@ -269,7 +269,7 @@
 ;   subtracts unity from n as many times as
 ;   unity may be substracted from m
 ;   until m reachs null
-;   (m cannot be negative)
+;   (rule: m cannot be negative)
 ;
 ; example
 ;   (o- 14 3)
@@ -285,6 +285,7 @@
 ; addtup, nonegative integer
 ;   builds a number
 ;   by totaling all the numbers in a tup
+;   (rule: no negative integers)
 ;
 ; terminal condition: ((null? tup) 0)
 ; natural recursion:  (addtup (cdr tup))
@@ -303,8 +304,8 @@
 ; x, nonnegative integer
 ;   builds a number
 ;   by totaling n with itself m times
-;   (neither n nor m can be negative)
-;   (n may be negative when m is either 0 or 1)
+;   (rule: neither n nor m can be negative)
+;   (technical exception: n may be negative when m is either 0 or 1)
 ;
 ; terminal condition: ((zero? m) 0)
 ; natural recursion:  (x n (sub1 m))
