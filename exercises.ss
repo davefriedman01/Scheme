@@ -25,6 +25,16 @@
 ;
 ;;;;;;;;;;;;;;;;;;;;
 
+; ATOM
+;   a string of characters
+;   a number
+
+; zero? asks if a number is empty
+; null? asks if a list   is empty
+
+; add1 builds numbers
+; cons builds lists
+
 (define atom?
   (lambda (x)
     (and (not (pair? x)) (not (null? x)))))
@@ -171,6 +181,61 @@
               ((eq? (car lat) old) (cons new (multisubst new old (cdr lat))))
               (else
                 (cons (car lat) (multisubst new old (cdr lat)))))))))
+
+(atom? 14)      ; #t
+(atom? -3)      ; #t
+(atom? 3.14159) ; #t
+
+(define add1
+  (lambda (n)
+    (+ n 1)))
+
+(define sub1
+  (lambda (n)
+    (- n 1)))
+
+(add1 67)       ; 68
+(sub1 5)        ; 4
+(sub1 0)        ; -1
+(zero? 1492)    ; #f
+
+; addition, nonnegative integer
+;   m cannot be negative
+;
+;   adds unity to n as many times as
+;   unity may be substracted from m
+;   until m reachs null
+;
+; example
+;   (o+ 46 12)
+; produces
+;   58
+(define o+
+  (lambda (n m)
+    (cond
+      ((zero? m) n)
+      (else
+        (add1 (o+ n (sub1 m)))))))
+
+; substraction, nonnegative integer
+;   m cannot be negative
+;
+;   subtracts unity from n as many times as
+;   unity may be substracted from m
+;   until m reachs null
+;
+; example
+;   (o- 14 3)
+; produces
+;   11
+(define o-
+  (lambda (n m)
+    (cond
+      ((zero? m) n)
+      (else
+        (sub1 (o- n (sub1 m)))))))
+
+
 
 ;;;;;;;;;;;;;;;;;;;;
 ;
