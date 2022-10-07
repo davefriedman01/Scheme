@@ -249,11 +249,10 @@
 (zero? 1492)    ; #f
 
 ; addition, nonnegative integer
-;   m cannot be negative
-;
 ;   adds unity to n as many times as
 ;   unity may be substracted from m
 ;   until m reachs null
+;   (m cannot be negative)
 ;
 ; example
 ;   (o+ 46 12)
@@ -267,11 +266,10 @@
         (add1 (o+ n (sub1 m)))))))
 
 ; substraction, nonnegative integer
-;   m cannot be negative
-;
 ;   subtracts unity from n as many times as
 ;   unity may be substracted from m
 ;   until m reachs null
+;   (m cannot be negative)
 ;
 ; example
 ;   (o- 14 3)
@@ -287,11 +285,10 @@
 ; addtup
 ;   builds a number
 ;   by totaling all the numbers in a tup
+;   (m cannot be negative)
 ;
-;   terminal condition
-;     ((null? tup) 0)
-;   natural recursion
-;     (addtup (cdr tup))
+; terminal condition: ((null? tup) 0)
+; natural recursion:  (addtup (cdr tup))
 ;
 ; example
 ;   (addtup '(1 2 3 4))
@@ -304,6 +301,17 @@
       (else
         (o+ (car tup) (addtup (cdr tup)))))))
 
+; x
+;   builds a number
+;   by totaling n with itself m times
+;
+; terminal condition: ((zero? m) 0)
+; natural recursion:  (x n (sub1 m))
+;
+; example
+;   (x 5 3)
+; produces
+;   15
 (define x
   (lambda (n m)
     (cond
