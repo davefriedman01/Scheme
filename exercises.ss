@@ -282,10 +282,9 @@
       (else
         (sub1 (o- n (sub1 m)))))))
 
-; addtup
+; addtup, nonegative integer
 ;   builds a number
 ;   by totaling all the numbers in a tup
-;   (m cannot be negative)
 ;
 ; terminal condition: ((null? tup) 0)
 ; natural recursion:  (addtup (cdr tup))
@@ -301,9 +300,11 @@
       (else
         (o+ (car tup) (addtup (cdr tup)))))))
 
-; x
+; x, nonnegative integer
 ;   builds a number
 ;   by totaling n with itself m times
+;   (neither n nor m can be negative)
+;   (n may be negative when m is either 0 or 1)
 ;
 ; terminal condition: ((zero? m) 0)
 ; natural recursion:  (x n (sub1 m))
