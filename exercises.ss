@@ -345,6 +345,11 @@
 ;   in order to denote procedure application
 ;   the leftmost element in the list is called the operator
 ;   and the rest of the elements are called operands
+;
+; to evaluate a combination
+;   1. evaluate the subexpressions of the combination
+;   2. apply the procedure that is the value of the leftmost subexpression (the operator)
+;      to the arguments that are the values of the other subexpressions (the operands)
 
 (+ 137 349)
 (- 1000 334)
@@ -359,6 +364,168 @@
          (+ 3 5)))
    (+ (- 10 7)
       6))
+
+; NAMING
+;   things that can be named are done so with `define`
+
+(define size 2)
+size
+(* 5 size)
+(define pi 3.14159)
+(define radius 10)
+(* pi (* radius radius))
+(define circumference (* 2 pi radius))
+circumference
+
+; (GLOBAL) ENVIRONMENT
+
+; SPECIAL FORMS
+;   e.g., (define x 3)
+
+; COMPOUND PROCEDURE DEFINITION
+;   a technique of abstraction
+;   by which a compound operation can be given a name
+;
+; general form
+;   (define (<name> <parameters>) <body>)
+;
+;   <name>       a symbol to be associated with with the procedure definition in the environment
+;   <parameters> the names used within the body of the procedure
+;                to refer to the corresponding arguments of the procedure
+;   <body>       a sequence of expressions that will yield the value of the procedure application
+;                when the parameters are replaced by the actual arguments to which the procedure is applied
+;
+; two operations
+;   to create a procedure without naming it
+;   to name a procedure which has already been created
+
+(define (square x) (* x x))
+
+(define (sum-of-squares x y)
+  (+ (square x) (square y)))
+
+(define (f a)
+  (sum-of-squares (+ a 1) (* a 2)))
+
+(square 21)          ; 441
+(square (+ 2 5))     ; 49
+(square (square 3))  ; 81
+(sum-of-squares 3 4) ; 25
+(f 5)                ; 136
+
+; SUBSTITUTION MODEL FOR PROCEDURE APPLICATION
+
+; Applicative-Order Evaluation
+; (f 5)
+; (sum-of-squares (+ 5 1) (* 5 2))
+; (+ (square 6) (square 10))
+; (+ (* 6 6) (* 10 10))
+; (+ 36 100)
+; 136
+
+; Normal-Order Evaluation
+; expansions
+; (f 5)
+; (sum-of-squares (+ 5 1) (* 5 2))
+; (+ (square (+ 5 1)) (square (* 5 2)))
+; (+ (* (+ 5 1) (+ 5 1)) (* (* 5 2) (* 5 2)))
+; reductions
+; (+ (* 6 6) (* 10 10))
+; (+ 36 100)
+; 136
+
+; it can be show that
+; for procedure applications that can be modeled using substitution
+; and that yield legitimate values
+; normal-order and applicative-order evaluation produce the same result
+
+; CONDITIONAL EXPRESSION
+;
+; general form
+;   (cond (<p1> <e1>)
+;         (<p2> <e2>)
+;         ...
+;         (<pn> <en>))
+;
+; each clause (<p> <e>) is composed of
+;   a predicate <p>
+;   a (sequence of) consequent expressions <e>
+
+; PREDICATE
+;   a procedure that returns true or false
+;
+; primitive predicates
+;   <
+;   >
+;   =
+
+(define (abs x)
+  (cond
+    ((> x 0) x)
+    ((= x 0) 0)
+    ((< x 0) (- x))))
+
+(define (abs x)
+  (cond
+    ((< x 0) (- x))
+    (else x)))
+
+; IF
+;   SPECIAL FORM
+;   a restricted conditional expression
+;   to be used when there are two and only two cases in the case analysis
+;
+; Evaluation Rule
+;   evaluate <predicate>
+;   if <predicate> is true
+;     then evaluate <consequent> and return its value
+;   else
+;     evaluate <alternative> and return its value
+;
+; general form
+;   (if <predicate> <consequent> <alternative>)
+;
+;   <consequent> and <alternative> must be single expressions
+
+(define (abs x)
+  (if (< x 0) (- x) x))
+
+; AND
+;   COMPOUND PREDICATE
+;   SPECIAL FORM
+;     the subexpressions are not necessarily all evaluated
+;
+; Evaluation Rule
+;   ...
+;
+; general form
+;   (and <e1> ... <en>)
+
+; OR
+;   COMPOUND PREDICATE
+;   SPECIAL FORM
+;     the subexpressions are not necessarily all evaluated
+;
+; Evaluation Rule
+;   ...
+;
+; general form
+;   (or <e1> ... <en>)
+
+; NOT
+;   COMPOUND PREDICATE
+;
+; general form
+;   (not <e>)
+
+(define (>= x y)
+  (or (> x y)
+      (= x y)))
+
+(define (>= x y)
+  (not (< x y)))
+
+
 
 ;;;;;;;;;;;;;;;;;;;;
 ;
